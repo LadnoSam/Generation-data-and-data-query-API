@@ -121,8 +121,8 @@ def insert_users_to_db(users):
 # Create performance metrics table 
 def create_performance_table():
     con = psycopg2.connect(
-        user='postgres', password='123',
-        host='localhost', port='5432', database='postgres'
+        user='ur_user', password='ur_password',
+        host='localhost', port='5432', database='ur_db'
     )
     cursor = con.cursor()
     cursor.execute("""
@@ -141,8 +141,8 @@ def create_performance_table():
 # Create table for binary data
 def create_binary_data_table():
     con = psycopg2.connect(
-        user='postgres', password='123',
-        host='localhost', port='5432', database='postgres'
+        user='ur_user', password='ur_password',
+        host='localhost', port='5432', database='ur_db'
     )
     cursor = con.cursor()
     cursor.execute("""
@@ -160,8 +160,8 @@ def create_binary_data_table():
 # Store performance stats
 def insert_performance_metrics(operation_type, duration, records_count):
     con = psycopg2.connect(
-        user='postgres', password='123',
-        host='localhost', port='5432', database='postgres'
+        user='ur_user', password='ur_password',
+        host='localhost', port='5432', database='ur_db'
     )
     cursor = con.cursor()
     cursor.execute("""
@@ -175,8 +175,8 @@ def insert_performance_metrics(operation_type, duration, records_count):
 # Store binary data into database
 def insert_binary_data(bin_data, description=""):
     con = psycopg2.connect(
-        user='postgres', password='123',
-        host='localhost', port='5432', database='postgres'
+        user='ur_user', password='ur_password',
+        host='localhost', port='5432', database='ur_db'
     )
     cursor = con.cursor()
     cursor.execute("""
@@ -218,8 +218,8 @@ def upload_to_db():
     start_minio = time.time()
     client = Minio(
         "localhost:9000",
-        access_key='oNrjTPNAUhUGNSjOX2aA',
-        secret_key='rau6jnonycG7jhZQPghW2nUQmFYTUOvQStS5nQID',
+        access_key='ur_access_key',
+        secret_key='ur_secret_key',
         secure=False
     )
     bucket = "uploads"
@@ -269,8 +269,8 @@ def upload_binary_data():
 
     client = Minio(
         "localhost:9000",
-        access_key='oNrjTPNAUhUGNSjOX2aA',
-        secret_key='rau6jnonycG7jhZQPghW2nUQmFYTUOvQStS5nQID',
+        access_key='ur_access_key',
+        secret_key='ur_secret_key',
         secure=False
     )
     bucket = "binary-uploads"
@@ -315,7 +315,7 @@ def upload_all():
     # Upload binary to DB
     start_bin_pg = time.time()
     bin_data = pickle.dumps(filtered)
-    con = psycopg2.connect(user='postgres', password='123', host='localhost', port='5432', database='postgres')
+    con = psycopg2.connect(user='ur_user', password='ur_password', host='localhost', port='5432', database='ur_db')
     cursor = con.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS binary_data (
@@ -339,8 +339,8 @@ def upload_all():
 
     client = Minio(
         "localhost:9000",
-        access_key='oNrjTPNAUhUGNSjOX2aA',
-        secret_key='rau6jnonycG7jhZQPghW2nUQmFYTUOvQStS5nQID',
+        access_key='ur_access_key',
+        secret_key='ur_secret_key',
         secure=False
     )
 
@@ -390,8 +390,8 @@ def upload_all():
 @app.route("/metrics")
 def get_metrics():
     con = psycopg2.connect(
-        user='postgres', password='123',
-        host='localhost', port='5432', database='postgres'
+        user='ur_user', password='ur_password',
+        host='localhost', port='5432', database='ur_db'
     )
     cursor = con.cursor()
 
