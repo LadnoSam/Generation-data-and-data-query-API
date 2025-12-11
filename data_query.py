@@ -71,8 +71,8 @@ def filter_users(users, args):
 # Insert filtered users into PostgreSQL table
 def insert_users_to_db(users):
     con = psycopg2.connect(
-        user='postgres', password='123',
-        host='localhost', port='5432', database='postgres'
+        user='ur_user', password='ur_password',
+        host='localhost', port='5432', database='ur_db'
     )
     cursor = con.cursor()
 
